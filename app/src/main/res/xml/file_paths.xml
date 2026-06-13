@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 共享应用 filesDir/scans 下的 PDF 文件 -->
+    <files-path
+        name="scans"
+        path="scans/" />
+    <!-- 共享 cacheDir 用于拍照后处理前的临时文件 -->
+    <cache-path
+        name="cache"
+        path="." />
+</paths>
