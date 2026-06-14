@@ -3,6 +3,31 @@
 > AI 协作者（Claude Code / Codex / Cursor / Aider / 其他 LLM agent）阅读指南。
 >
 > 本文件让你**在 5 分钟内**理解项目结构、约定、关键文件，**不需要**通读全部源码。
+>
+> **本文件性质**：长期稳定。少改。如需新增经验，**追加**在合适章节末尾，不要重写。
+
+## 📚 文档三件套（先读这个！）
+
+项目根目录有 4 个文档，**性质不同**：
+
+| 文件 | 性质 | 何时读 | 何时改 |
+|---|---|---|---|
+| **AGENTS.md**（本文件） | 稳定规则、长期约束 | 接手时第一份读 | **少改**；新增经验追加在合适章节 |
+| `agent-handoff.md` | 短期交接、本次任务状态 | 接手时第二份读 | 每次任务结束**重写** |
+| `WORKLOG.md` | 决策日志、为什么 | 接手时第三份读 | **追加**（时间倒序），保留失败路径 |
+| `ROADMAP.md` | 下阶段候选功能 | 规划下阶段时读 | 完成任务后更新状态 |
+| `README.md` | 用户视角 | 给新人 / 用户看 | 功能变更时同步 |
+| `CHANGELOG.md` | 版本变更 | 发版时更新 | 每个 release 追加 |
+
+**接手的标准流程**：
+```
+1. 读 README.md            → 知道项目是什么
+2. 读 AGENTS.md            → 知道结构和约束（你正在读）
+3. 读 agent-handoff.md     → 知道上次干了啥、还差啥
+4. 读 WORKLOG.md（最近 2-3 条）→ 知道最近的决策原因
+5. 读 ROADMAP.md           → 知道下阶段要做什么
+6. 开始干活
+```
 
 ## 项目一句话
 
@@ -10,9 +35,10 @@
 
 - **栈**：Kotlin + Jetpack Compose + OpenCV 4.10 (图像处理) + PDFBox-Android (PDF)
 - **平台**：Android 7.0+ (API 24)
-- **大小**：Release arm64-v8a 17 MB
+- **大小**：Release arm64-v8a 17 MB / universal 46 MB
 - **协议**：Apache 2.0
 - **仓库**：https://github.com/lxsfful/SimpleScanner
+- **当前状态**：v1.0.0 已发布（2026-06-13），待用户实机验证
 
 ## 核心功能（用户视角）
 
@@ -89,6 +115,19 @@ D:\Projects\SimpleScanner\  (本机路径)  →  https://github.com/lxsfful/Simp
 3. **`app/src/main/kotlin/com/lx/simplescanner/MainActivity.kt`** — 路由（home/capture/edit/preview）
 4. **`app/src/main/AndroidManifest.xml`** — 权限 + FileProvider
 5. **`gradle/libs.versions.toml`** — 依赖版本（要升级版本号来这里）
+
+## 项目当前状态
+
+| 维度 | 状态 |
+|---|---|
+| **版本** | v1.0.0 |
+| **发布日期** | 2026-06-13 |
+| **代码量** | 35 个 Kotlin 文件，~3650 行 |
+| **测试** | JVM 单测 1 个 + androidTest 3 个（未在 CI 跑） |
+| **CI/CD** | 无 |
+| **实机测试** | 仅在 arm64 Android 10 设备做基础安装验证，未充分测图像处理 |
+| **已知遗留** | 详见 `agent-handoff.md`「未完成 / 已知问题」 |
+| **下一阶段** | 详见 `ROADMAP.md`（P0: 实机调优 + OCR） |
 
 ## 关键技术决策（不要轻易改动）
 
@@ -240,6 +279,19 @@ adb -s <device-id> install -r app/build/outputs/apk/release/app-arm64-v8a-releas
 - **Issue**：用 `.github/ISSUE_TEMPLATE/bug_report.md` / `feature_request.md`
 - **PR**：commit 遵循 [Conventional Commits](https://www.conventionalcommits.org/)，类型：`feat:` / `fix:` / `refactor:` / `docs:` / `test:` / `chore:`
 - **不要**在 commit 里加 `Co-Authored-By`（项目全局禁用了归属）
+
+## 任务收尾的标准动作
+
+> 每次任务**结束前**必须做：
+
+1. **更新 `agent-handoff.md`**：重写整个文件，记录本次目标/已完成/修改/未完成/下一步
+2. **追加 `WORKLOG.md`**：在文件**顶部**追加新决策（保持时间倒序），保留失败路径
+3. **按需更新本 `AGENTS.md`**：仅当发现"长期稳定经验"才追加，**不要重写**
+4. **更新 `ROADMAP.md`**：勾掉完成项、补充新候选
+5. **commit + push**：`chore(docs): update handoff/worklog/roadmap for <任务名>`
+6. **如果用 GitHub API 发布**：参考 `~/.claude/projects/C--Users-LX/memory/github-api-credentials.md`
+
+**自动化提示**：可配 `hookify` Stop hook，handoff 当日未更新则阻断停止（见 `agent-handoff-methodology.md` 记忆文件）。
 
 ## 期望的 AI 行为
 
