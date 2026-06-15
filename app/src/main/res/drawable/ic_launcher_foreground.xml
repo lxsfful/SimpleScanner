@@ -4,20 +4,10 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- 居中的文档图标（白色），位于自适应图标 safe zone (66x66, 中心 21-87) -->
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M34,30 L62,30 L74,42 L74,82 L34,82 Z" />
-    <path
-        android:fillColor="#0061A4"
-        android:pathData="M62,30 L62,42 L74,42 Z" />
-    <path
-        android:fillColor="#0061A4"
-        android:pathData="M40,52 L68,52 L68,55 L40,55 Z" />
-    <path
-        android:fillColor="#0061A4"
-        android:pathData="M40,60 L68,60 L68,63 L40,63 Z" />
-    <path
-        android:fillColor="#0061A4"
-        android:pathData="M40,68 L60,68 L60,71 L40,71 Z" />
+    <path android:fillColor="#F8FBFF" android:pathData="M31,24h34l12,12v48h-46z" />
+    <path android:fillColor="#B9DDFF" android:pathData="M65,24v12h12z" />
+    <path android:strokeColor="#003B64" android:strokeWidth="4" android:strokeLineCap="round" android:fillColor="@android:color/transparent" android:pathData="M39,46h30M39,58h30M39,70h22" />
+    <path android:fillColor="#77D8FF" android:pathData="M24,34h8v5h-3v10h-5zM76,34h8v15h-5v-10h-3zM24,68h5v10h3v5h-8zM79,68h5v15h-8v-5h3z" />
+    <path android:fillColor="#F7C948" android:pathData="M24,53h60v6h-60z" />
+    <path android:strokeColor="#EAF6FF" android:strokeWidth="3" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="@android:color/transparent" android:pathData="M75,76v10h8M88,76l10,10M98,76l-10,10" />
 </vector>
